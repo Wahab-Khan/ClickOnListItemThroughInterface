@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MyRecyleViewAdapter.OnitemClickLisner{
 
     MyRecyleViewAdapter adapter;
     ArrayList<ModelClass> list;
@@ -29,20 +29,31 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
 
-        adapter.SetOnItemClickLisner(new MyRecyleViewAdapter.OnitemClickLisner() {
-            @Override
-            public void onItemClick(int position) {
-                list.get(position).changeText("changed");
-                adapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onDeletItemClick(int position) {
-                list.remove(position);
-                adapter.notifyItemRemoved(position);
-            }
-        });
+//        adapter.SetOnItemClickLisner(new MyRecyleViewAdapter.OnitemClickLisner() {
+//            @Override
+//            public void onItemClick(int position) {
+//                list.get(position).changeText("changed");
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onDeletItemClick(int position) {
+//                list.remove(position);
+//                adapter.notifyItemRemoved(position);
+//            }
+//        });
 
     }
 
+    @Override
+    public void onItemClick(int position) {
+        list.get(position).changeText("changed");
+                adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onDeletItemClick(int position) {
+        list.remove(position);
+                adapter.notifyItemRemoved(position);
+    }
 }
